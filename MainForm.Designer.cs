@@ -30,7 +30,7 @@ namespace GameOfLife
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.ControlPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.controlPanel = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxSurvive = new System.Windows.Forms.TextBox();
             this.labelSurvive = new System.Windows.Forms.Label();
             this.textBoxBorn = new System.Windows.Forms.TextBox();
@@ -43,57 +43,57 @@ namespace GameOfLife
             this.nudResolution = new System.Windows.Forms.NumericUpDown();
             this.buttonStartStop = new System.Windows.Forms.Button();
             this.textBoxGeneration = new System.Windows.Forms.TextBox();
-            this.ControlPanel.SuspendLayout();
+            this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).BeginInit();
             this.SuspendLayout();
             // 
-            // ControlPanel
+            // controlPanel
             // 
-            this.ControlPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ControlPanel.AutoSize = true;
-            this.ControlPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ControlPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ControlPanel.ColumnCount = 16;
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.ControlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.ControlPanel.Controls.Add(this.textBoxSurvive, 6, 0);
-            this.ControlPanel.Controls.Add(this.labelSurvive, 5, 0);
-            this.ControlPanel.Controls.Add(this.textBoxBorn, 4, 0);
-            this.ControlPanel.Controls.Add(this.labelBorn, 3, 0);
-            this.ControlPanel.Controls.Add(this.nudSpeed, 9, 0);
-            this.ControlPanel.Controls.Add(this.labelSpeed, 8, 0);
-            this.ControlPanel.Controls.Add(this.labelGeneration, 11, 0);
-            this.ControlPanel.Controls.Add(this.buttonExit, 15, 0);
-            this.ControlPanel.Controls.Add(this.labelResolution, 0, 0);
-            this.ControlPanel.Controls.Add(this.nudResolution, 1, 0);
-            this.ControlPanel.Controls.Add(this.buttonStartStop, 14, 0);
-            this.ControlPanel.Controls.Add(this.textBoxGeneration, 12, 0);
-            this.ControlPanel.ForeColor = System.Drawing.Color.White;
-            this.ControlPanel.Location = new System.Drawing.Point(54, 0);
-            this.ControlPanel.Name = "ControlPanel";
-            this.ControlPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.ControlPanel.RowCount = 1;
-            this.ControlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.ControlPanel.Size = new System.Drawing.Size(1243, 47);
-            this.ControlPanel.TabIndex = 1;
+            this.controlPanel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.controlPanel.AutoSize = true;
+            this.controlPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.controlPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.controlPanel.ColumnCount = 16;
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.controlPanel.Controls.Add(this.textBoxSurvive, 6, 0);
+            this.controlPanel.Controls.Add(this.labelSurvive, 5, 0);
+            this.controlPanel.Controls.Add(this.textBoxBorn, 4, 0);
+            this.controlPanel.Controls.Add(this.labelBorn, 3, 0);
+            this.controlPanel.Controls.Add(this.nudSpeed, 9, 0);
+            this.controlPanel.Controls.Add(this.labelSpeed, 8, 0);
+            this.controlPanel.Controls.Add(this.labelGeneration, 11, 0);
+            this.controlPanel.Controls.Add(this.buttonExit, 15, 0);
+            this.controlPanel.Controls.Add(this.labelResolution, 0, 0);
+            this.controlPanel.Controls.Add(this.nudResolution, 1, 0);
+            this.controlPanel.Controls.Add(this.buttonStartStop, 14, 0);
+            this.controlPanel.Controls.Add(this.textBoxGeneration, 12, 0);
+            this.controlPanel.ForeColor = System.Drawing.Color.White;
+            this.controlPanel.Location = new System.Drawing.Point(54, 0);
+            this.controlPanel.Name = "controlPanel";
+            this.controlPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.controlPanel.RowCount = 1;
+            this.controlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.controlPanel.Size = new System.Drawing.Size(1243, 47);
+            this.controlPanel.TabIndex = 1;
             // 
             // textBoxSurvive
             // 
@@ -199,7 +199,7 @@ namespace GameOfLife
             this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(150, 37);
-            this.buttonExit.TabIndex = 2;
+            this.buttonExit.TabIndex = 1;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
@@ -279,7 +279,7 @@ namespace GameOfLife
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1350, 775);
-            this.Controls.Add(this.ControlPanel);
+            this.Controls.Add(this.controlPanel);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -291,8 +291,8 @@ namespace GameOfLife
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
-            this.ControlPanel.ResumeLayout(false);
-            this.ControlPanel.PerformLayout();
+            this.controlPanel.ResumeLayout(false);
+            this.controlPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).EndInit();
             this.ResumeLayout(false);
@@ -302,7 +302,7 @@ namespace GameOfLife
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel ControlPanel;
+        private System.Windows.Forms.TableLayoutPanel controlPanel;
         private System.Windows.Forms.TextBox textBoxSurvive;
         private System.Windows.Forms.Label labelSurvive;
         private System.Windows.Forms.TextBox textBoxBorn;

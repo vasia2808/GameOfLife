@@ -12,6 +12,9 @@ namespace GameOfLife
 {
     public partial class MainForm : Form
     {
+        private const int PanelMovingSpeed = 10;
+        private bool controlPanelMoving;
+
         private int resolution;
         private Graphics graphics;
 
@@ -22,7 +25,7 @@ namespace GameOfLife
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ControlPanel.Location = new Point((Width - ControlPanel.Width) / 2, 0);
+            controlPanel.Location = new Point((Width - controlPanel.Width) / 2, -controlPanel.Height);
             BackgroundImage = new Bitmap(Width, Height);
             graphics = Graphics.FromImage(BackgroundImage);
 
@@ -33,7 +36,17 @@ namespace GameOfLife
         {
             if (e.Button == MouseButtons.None)
             {
-
+                if (!controlPanelMoving)
+                {
+                    if (MouseOnPanelLocation(e))
+                    {
+                        ShowControlPanel();
+                    }
+                    else
+                    {
+                        HideControlPanel();
+                    }
+                }
             }
             else
             {
@@ -68,6 +81,41 @@ namespace GameOfLife
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private bool MouseOnPanelLocation(MouseEventArgs e)
+        {
+            return e.Location.X < controlPanel.Location.X + controlPanel.Width && e.Location.X >= controlPanel.Location.X && e.Location.Y < controlPanel.Height;
+        }
+
+        private async void ShowControlPanel()
+        {
+            controlPanelMoving = true;
+            controlPanel.Enabled = true;
+
+            while (controlPanel.Location.Y < 0 - PanelMovingSpeed)
+            {
+                controlPanel.Location = new Point(controlPanel.Location.X, controlPanel.Location.Y + PanelMovingSpeed);
+                await Task.Delay(16);
+            }
+
+            controlPanel.Location = new Point(controlPanel.Location.X, 0);
+            controlPanelMoving = false;
+        }
+
+        private async void HideControlPanel()
+        {
+            controlPanelMoving = true;
+
+            while (controlPanel.Location.Y > -controlPanel.Height + PanelMovingSpeed)
+            {
+                controlPanel.Location = new Point(controlPanel.Location.X, controlPanel.Location.Y - PanelMovingSpeed);
+                await Task.Delay(16);
+            }
+
+            controlPanel.Location = new Point(controlPanel.Location.X, -controlPanel.Height);
+            controlPanel.Enabled = false;
+            controlPanelMoving = false;
         }
 
         private void DrawGrid()
