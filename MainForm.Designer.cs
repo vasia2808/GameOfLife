@@ -202,6 +202,7 @@ namespace GameOfLife
             this.buttonExit.TabIndex = 2;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // labelResolution
             // 
@@ -242,10 +243,11 @@ namespace GameOfLife
             this.nudResolution.TabStop = false;
             this.nudResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudResolution.Value = new decimal(new int[] {
-            10,
+            20,
             0,
             0,
             0});
+            this.nudResolution.ValueChanged += new System.EventHandler(this.nudResolution_ValueChanged);
             // 
             // buttonStartStop
             // 
@@ -278,6 +280,7 @@ namespace GameOfLife
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1350, 775);
             this.Controls.Add(this.ControlPanel);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -286,6 +289,7 @@ namespace GameOfLife
             this.Text = "Game of Life";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseClick);
             this.ControlPanel.ResumeLayout(false);
             this.ControlPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
