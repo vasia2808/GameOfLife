@@ -12,11 +12,25 @@ namespace GameOfLife
 {
     public partial class MainForm : Form
     {
-        private const int PanelMovingSpeed = 10;
-        private bool controlPanelMoving;
+        private enum GameStatus
+        {
+            Start,
+            Pause,
+            Reset
+        }
 
+        #region consts
+        private const int PanelMovingSpeed = 10;
+        private const int MaxSpeed = 16;
+        private const int MinSpeed = 1000;
+        private readonly Color cellColor = Color.DeepSkyBlue;
+        #endregion
+
+        private bool controlPanelMoving;
+        private GameStatus gameStatus = GameStatus.Reset;
         private int resolution;
         private Graphics graphics;
+        private GameEngine gameEngine;
 
         public MainForm()
         {
@@ -38,7 +52,7 @@ namespace GameOfLife
             {
                 if (!controlPanelMoving)
                 {
-                    if (MouseOnPanelLocation(e))
+                    if (MouseOnControlPanelLocation(e))
                     {
                         ShowControlPanel();
                     }
@@ -56,21 +70,26 @@ namespace GameOfLife
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)
         {
-            int x = e.Location.X / resolution;
-            int y = e.Location.Y / resolution;
-
-            switch (e.Button)
+            if (gameStatus != GameStatus.Start)
             {
-                case MouseButtons.Left:
-                    AddCell(x, y);
-                    break;
+                int x = e.Location.X / resolution;
+                int y = e.Location.Y / resolution;
 
-                case MouseButtons.Right:
-                    RemoveCell(x, y);
-                    break;
+                switch (e.Button)
+                {
+                    case MouseButtons.Left:
+                        AddCell(x, y);
+                        gameEngine.AddCell(x, y);
+                        break;
+
+                    case MouseButtons.Right:
+                        RemoveCell(x, y);
+                        gameEngine.RemoveCell(x, y);
+                        break;
+                }
+
+                Refresh();
             }
-
-            Refresh();
         }
 
         private void nudResolution_ValueChanged(object sender, EventArgs e)
@@ -78,12 +97,61 @@ namespace GameOfLife
             DrawGrid();
         }
 
+        private void nudSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            timer.Interval = (int)Map((int)nudSpeed.Value, (int)nudSpeed.Minimum, (int)nudSpeed.Maximum, MinSpeed, MaxSpeed);
+        }
+
+        private float Map(float n, float start1, float stop1, float start2, float stop2)
+        {
+            return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+        }
+
+        #region Buttons
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            switch (gameStatus)
+            {
+                case GameStatus.Start:
+                    gameStatus = GameStatus.Pause;
+                    buttonStart.Text = "Continue";
+                    PauseGame();
+                    break;
+
+                case GameStatus.Pause:
+                    gameStatus = GameStatus.Start;
+                    buttonStart.Text = "Pause";
+                    StartGame();
+                    break;
+
+                case GameStatus.Reset:
+                    gameStatus = GameStatus.Start;
+                    buttonStart.Text = "Pause";
+                    StartGame();
+                    break;
+            }
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            gameStatus = GameStatus.Reset;
+            buttonStart.Text = "Start";
+            ResetGame();
+        }
+
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Close();
         }
+        #endregion
 
-        private bool MouseOnPanelLocation(MouseEventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            DrawGeneration();
+        }
+
+        #region MovingControlPanel
+        private bool MouseOnControlPanelLocation(MouseEventArgs e)
         {
             return e.Location.X < controlPanel.Location.X + controlPanel.Width && e.Location.X >= controlPanel.Location.X && e.Location.Y < controlPanel.Height;
         }
@@ -117,21 +185,68 @@ namespace GameOfLife
             controlPanel.Enabled = false;
             controlPanelMoving = false;
         }
+        #endregion
 
+        private void StartGame()
+        {
+            DisableControls();
+            timer.Start();
+        }
+
+        private void PauseGame()
+        {
+            timer.Stop();
+        }
+
+        private void ResetGame()
+        {
+            timer.Stop();
+            DrawGrid();
+            EnableControls();
+        }
+
+        private void EnableControls()
+        {
+            SetControlsEnabled(true);
+        }
+
+        private void DisableControls()
+        {
+            SetControlsEnabled(false);
+        }
+
+        private void SetControlsEnabled(bool enabled)
+        {
+            nudResolution.Enabled = enabled;
+            textBoxBorn.Enabled = enabled;
+            textBoxSurvive.Enabled = enabled;
+        }
+
+        #region Draw
         private void DrawGrid()
         {
             resolution = (int)nudResolution.Value;
+
+            gameEngine = new GameEngine
+            (
+                rows: Height / resolution,
+                cols: Width / resolution,
+                bornRule: textBoxBorn.Text,
+                surviveRule: textBoxSurvive.Text
+            );
+
+            textBoxGeneration.Text = gameEngine.CurrentGeneration.ToString();
 
             graphics.Clear(BackColor);
 
             Pen pen = new Pen(Brushes.Black);
 
-            for (int x = 0; x < Width; x += resolution)
+            for (int x = resolution - 1; x < Width; x += resolution)
             {
                 graphics.DrawLine(pen, new Point(x, 0), new Point(x, Height));
             }
 
-            for (int y = 0; y < Height; y += resolution)
+            for (int y = resolution - 1; y < Height; y += resolution)
             {
                 graphics.DrawLine(pen, new Point(0, y), new Point(Width, y));
             }
@@ -139,9 +254,34 @@ namespace GameOfLife
             Refresh();
         }
 
+        private void DrawGeneration()
+        {
+            gameEngine.NextGeneration();
+
+            bool[,] field = gameEngine.GetCurrentGeneration();
+
+            for (int x = 0; x < field.GetLength(0); x++)
+            {
+                for (int y = 0; y < field.GetLength(1); y++)
+                {
+                    if (field[x, y])
+                    {
+                        AddCell(x, y);
+                    }
+                    else
+                    {
+                        RemoveCell(x, y);
+                    }
+                }
+            }
+
+            textBoxGeneration.Text = gameEngine.CurrentGeneration.ToString();
+            Refresh();
+        }
+
         private void AddCell(int x, int y)
         {
-            DrawRectangle(x, y, Brushes.DeepSkyBlue);
+            DrawRectangle(x, y, new SolidBrush(cellColor));
         }
 
         private void RemoveCell(int x, int y)
@@ -153,5 +293,6 @@ namespace GameOfLife
         {
             graphics.FillRectangle(brush, x * resolution, y * resolution, resolution - 1, resolution - 1);
         }
+        #endregion
     }
 }

@@ -29,8 +29,10 @@ namespace GameOfLife
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.controlPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonReset = new System.Windows.Forms.Button();
             this.textBoxSurvive = new System.Windows.Forms.TextBox();
             this.labelSurvive = new System.Windows.Forms.Label();
             this.textBoxBorn = new System.Windows.Forms.TextBox();
@@ -41,8 +43,9 @@ namespace GameOfLife
             this.buttonExit = new System.Windows.Forms.Button();
             this.labelResolution = new System.Windows.Forms.Label();
             this.nudResolution = new System.Windows.Forms.NumericUpDown();
-            this.buttonStartStop = new System.Windows.Forms.Button();
+            this.buttonStart = new System.Windows.Forms.Button();
             this.textBoxGeneration = new System.Windows.Forms.TextBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).BeginInit();
@@ -54,7 +57,7 @@ namespace GameOfLife
             this.controlPanel.AutoSize = true;
             this.controlPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.controlPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.controlPanel.ColumnCount = 16;
+            this.controlPanel.ColumnCount = 17;
             this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
@@ -71,9 +74,8 @@ namespace GameOfLife
             this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.controlPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.controlPanel.Controls.Add(this.buttonReset, 15, 0);
             this.controlPanel.Controls.Add(this.textBoxSurvive, 6, 0);
             this.controlPanel.Controls.Add(this.labelSurvive, 5, 0);
             this.controlPanel.Controls.Add(this.textBoxBorn, 4, 0);
@@ -81,19 +83,33 @@ namespace GameOfLife
             this.controlPanel.Controls.Add(this.nudSpeed, 9, 0);
             this.controlPanel.Controls.Add(this.labelSpeed, 8, 0);
             this.controlPanel.Controls.Add(this.labelGeneration, 11, 0);
-            this.controlPanel.Controls.Add(this.buttonExit, 15, 0);
+            this.controlPanel.Controls.Add(this.buttonExit, 16, 0);
             this.controlPanel.Controls.Add(this.labelResolution, 0, 0);
             this.controlPanel.Controls.Add(this.nudResolution, 1, 0);
-            this.controlPanel.Controls.Add(this.buttonStartStop, 14, 0);
+            this.controlPanel.Controls.Add(this.buttonStart, 14, 0);
             this.controlPanel.Controls.Add(this.textBoxGeneration, 12, 0);
             this.controlPanel.ForeColor = System.Drawing.Color.White;
-            this.controlPanel.Location = new System.Drawing.Point(54, 0);
+            this.controlPanel.Location = new System.Drawing.Point(-24, 0);
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Padding = new System.Windows.Forms.Padding(5);
             this.controlPanel.RowCount = 1;
             this.controlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.controlPanel.Size = new System.Drawing.Size(1243, 47);
+            this.controlPanel.Size = new System.Drawing.Size(1388, 47);
             this.controlPanel.TabIndex = 1;
+            // 
+            // buttonReset
+            // 
+            this.buttonReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonReset.Location = new System.Drawing.Point(1074, 5);
+            this.buttonReset.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(150, 37);
+            this.buttonReset.TabIndex = 1;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = false;
+            this.buttonReset.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // textBoxSurvive
             // 
@@ -145,27 +161,28 @@ namespace GameOfLife
             this.nudSpeed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.nudSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nudSpeed.ForeColor = System.Drawing.Color.White;
-            this.nudSpeed.Increment = new decimal(new int[] {
+            this.nudSpeed.Location = new System.Drawing.Point(618, 8);
+            this.nudSpeed.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.nudSpeed.Location = new System.Drawing.Point(618, 8);
             this.nudSpeed.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nudSpeed.Name = "nudSpeed";
-            this.nudSpeed.Size = new System.Drawing.Size(65, 30);
+            this.nudSpeed.Size = new System.Drawing.Size(54, 30);
             this.nudSpeed.TabIndex = 10;
             this.nudSpeed.TabStop = false;
             this.nudSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudSpeed.Value = new decimal(new int[] {
-            90,
+            10,
             0,
             0,
             0});
+            this.nudSpeed.ValueChanged += new System.EventHandler(this.nudSpeed_ValueChanged);
             // 
             // labelSpeed
             // 
@@ -182,7 +199,7 @@ namespace GameOfLife
             // 
             this.labelGeneration.AutoSize = true;
             this.labelGeneration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelGeneration.Location = new System.Drawing.Point(704, 5);
+            this.labelGeneration.Location = new System.Drawing.Point(693, 5);
             this.labelGeneration.Name = "labelGeneration";
             this.labelGeneration.Size = new System.Drawing.Size(108, 37);
             this.labelGeneration.TabIndex = 7;
@@ -195,11 +212,11 @@ namespace GameOfLife
             this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.buttonExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExit.Location = new System.Drawing.Point(1085, 5);
+            this.buttonExit.Location = new System.Drawing.Point(1230, 5);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(150, 37);
-            this.buttonExit.TabIndex = 1;
+            this.buttonExit.TabIndex = 2;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
@@ -233,7 +250,7 @@ namespace GameOfLife
             0,
             0});
             this.nudResolution.Minimum = new decimal(new int[] {
-            2,
+            5,
             0,
             0,
             0});
@@ -249,29 +266,35 @@ namespace GameOfLife
             0});
             this.nudResolution.ValueChanged += new System.EventHandler(this.nudResolution_ValueChanged);
             // 
-            // buttonStartStop
+            // buttonStart
             // 
-            this.buttonStartStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonStartStop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.buttonStartStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonStartStop.Location = new System.Drawing.Point(929, 5);
-            this.buttonStartStop.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.buttonStartStop.Name = "buttonStartStop";
-            this.buttonStartStop.Size = new System.Drawing.Size(150, 37);
-            this.buttonStartStop.TabIndex = 0;
-            this.buttonStartStop.Text = "Start";
-            this.buttonStartStop.UseVisualStyleBackColor = false;
+            this.buttonStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
+            this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStart.Location = new System.Drawing.Point(918, 5);
+            this.buttonStart.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(150, 37);
+            this.buttonStart.TabIndex = 0;
+            this.buttonStart.Text = "Start";
+            this.buttonStart.UseVisualStyleBackColor = false;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // textBoxGeneration
             // 
             this.textBoxGeneration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.textBoxGeneration.ForeColor = System.Drawing.Color.White;
-            this.textBoxGeneration.Location = new System.Drawing.Point(818, 8);
+            this.textBoxGeneration.Location = new System.Drawing.Point(807, 8);
             this.textBoxGeneration.Name = "textBoxGeneration";
             this.textBoxGeneration.ReadOnly = true;
             this.textBoxGeneration.Size = new System.Drawing.Size(90, 30);
             this.textBoxGeneration.TabIndex = 8;
             this.textBoxGeneration.TabStop = false;
+            // 
+            // timer
+            // 
+            this.timer.Interval = 40;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // MainForm
             // 
@@ -313,8 +336,10 @@ namespace GameOfLife
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Label labelResolution;
         private System.Windows.Forms.NumericUpDown nudResolution;
-        private System.Windows.Forms.Button buttonStartStop;
+        private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.TextBox textBoxGeneration;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button buttonReset;
     }
 }
 
