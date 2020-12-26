@@ -89,7 +89,7 @@ namespace GameOfLife
             this.controlPanel.Controls.Add(this.buttonStart, 14, 0);
             this.controlPanel.Controls.Add(this.textBoxGeneration, 12, 0);
             this.controlPanel.ForeColor = System.Drawing.Color.White;
-            this.controlPanel.Location = new System.Drawing.Point(-24, 0);
+            this.controlPanel.Location = new System.Drawing.Point(-19, 0);
             this.controlPanel.Name = "controlPanel";
             this.controlPanel.Padding = new System.Windows.Forms.Padding(5);
             this.controlPanel.RowCount = 1;
@@ -290,6 +290,7 @@ namespace GameOfLife
             this.textBoxGeneration.Size = new System.Drawing.Size(90, 30);
             this.textBoxGeneration.TabIndex = 8;
             this.textBoxGeneration.TabStop = false;
+            this.textBoxGeneration.Text = "0";
             // 
             // timer
             // 

@@ -10,17 +10,20 @@ namespace GameOfLife
         private bool[,] field;
         private readonly int rows;
         private readonly int cols;
-        private readonly HashSet<byte> bornRule;
-        private readonly HashSet<byte> surviveRule;
+        private HashSet<byte> bornRule;
+        private HashSet<byte> surviveRule;
 
         public uint CurrentGeneration { get; private set; } = 0;
 
-        public GameEngine(int rows, int cols, string bornRule, string surviveRule)
+        public GameEngine(int rows, int cols)
         {
             this.rows = rows;
             this.cols = cols;
             field = new bool[cols, rows];
+        }
 
+        public void SetRules(string bornRule, string surviveRule)
+        {
             this.bornRule = new HashSet<byte>(bornRule.Select(c => (byte)char.GetNumericValue(c)));
             this.surviveRule = new HashSet<byte>(surviveRule.Select(c => (byte)char.GetNumericValue(c)));
         }

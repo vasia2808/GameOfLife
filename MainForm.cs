@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,7 +17,7 @@ namespace GameOfLife
         #region consts
         private const int PanelMovingSpeed = 10;
         private const int MaxSpeed = 16;
-        private const int MinSpeed = 1000;
+        private const int MinSpeed = 500;
         private readonly Color cellColor = Color.DeepSkyBlue;
         #endregion
 
@@ -190,6 +185,9 @@ namespace GameOfLife
         private void StartGame()
         {
             DisableControls();
+
+            gameEngine.SetRules(textBoxBorn.Text, textBoxSurvive.Text);
+
             timer.Start();
         }
 
@@ -230,12 +228,8 @@ namespace GameOfLife
             gameEngine = new GameEngine
             (
                 rows: Height / resolution,
-                cols: Width / resolution,
-                bornRule: textBoxBorn.Text,
-                surviveRule: textBoxSurvive.Text
+                cols: Width / resolution
             );
-
-            textBoxGeneration.Text = gameEngine.CurrentGeneration.ToString();
 
             graphics.Clear(BackColor);
 
