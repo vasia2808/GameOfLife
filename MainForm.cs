@@ -14,7 +14,7 @@ namespace GameOfLife
             Reset
         }
 
-        #region consts
+        #region constants
         private const int PanelMovingSpeed = 10;
         private const int MaxSpeed = 16;
         private const int MinSpeed = 500;
@@ -38,7 +38,7 @@ namespace GameOfLife
             BackgroundImage = new Bitmap(Width, Height);
             graphics = Graphics.FromImage(BackgroundImage);
 
-            DrawGrid();
+            nudResolution_ValueChanged(null, null);
         }
 
         private void MainForm_MouseMove(object sender, MouseEventArgs e)
@@ -89,7 +89,10 @@ namespace GameOfLife
 
         private void nudResolution_ValueChanged(object sender, EventArgs e)
         {
+            resolution = (int)nudResolution.Value;
+            InitializeGameEngine();
             DrawGrid();
+            Refresh();
         }
 
         private void nudSpeed_ValueChanged(object sender, EventArgs e)
@@ -199,7 +202,10 @@ namespace GameOfLife
         private void ResetGame()
         {
             timer.Stop();
+            InitializeGameEngine();
             DrawGrid();
+            Refresh();
+            textBoxGeneration.Text = "0";
             EnableControls();
         }
 
@@ -220,17 +226,41 @@ namespace GameOfLife
             textBoxSurvive.Enabled = enabled;
         }
 
-        #region Draw
-        private void DrawGrid()
+        private void InitializeGameEngine()
         {
-            resolution = (int)nudResolution.Value;
-
             gameEngine = new GameEngine
             (
                 rows: Height / resolution,
                 cols: Width / resolution
             );
+        }
 
+        #region Draw
+
+        private void DrawGeneration()
+        {
+            gameEngine.NextGeneration();
+
+            bool[,] field = gameEngine.GetCurrentGeneration();
+
+            DrawGrid();
+
+            for (int x = 0; x < field.GetLength(0); x++)
+            {
+                for (int y = 0; y < field.GetLength(1); y++)
+                {
+                    if (field[x, y])
+                    {
+                        AddCell(x, y);
+                    }
+                }
+            }
+
+            textBoxGeneration.Text = gameEngine.CurrentGeneration.ToString();
+            Refresh();
+        }
+        private void DrawGrid()
+        {
             graphics.Clear(BackColor);
 
             Pen pen = new Pen(Brushes.Black);
@@ -244,33 +274,6 @@ namespace GameOfLife
             {
                 graphics.DrawLine(pen, new Point(0, y), new Point(Width, y));
             }
-
-            Refresh();
-        }
-
-        private void DrawGeneration()
-        {
-            gameEngine.NextGeneration();
-
-            bool[,] field = gameEngine.GetCurrentGeneration();
-
-            for (int x = 0; x < field.GetLength(0); x++)
-            {
-                for (int y = 0; y < field.GetLength(1); y++)
-                {
-                    if (field[x, y])
-                    {
-                        AddCell(x, y);
-                    }
-                    else
-                    {
-                        RemoveCell(x, y);
-                    }
-                }
-            }
-
-            textBoxGeneration.Text = gameEngine.CurrentGeneration.ToString();
-            Refresh();
         }
 
         private void AddCell(int x, int y)

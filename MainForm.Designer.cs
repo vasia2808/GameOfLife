@@ -260,7 +260,7 @@ namespace GameOfLife
             this.nudResolution.TabStop = false;
             this.nudResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudResolution.Value = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
