@@ -29,9 +29,35 @@ namespace GameOfLife
             DrawGrid();
         }
 
-        private void MainForm_MouseClick(object sender, MouseEventArgs e)
+        private void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.None)
+            {
 
+            }
+            else
+            {
+                MainForm_MouseDown(sender, e);
+            }
+        }
+
+        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            int x = e.Location.X / resolution;
+            int y = e.Location.Y / resolution;
+
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    AddCell(x, y);
+                    break;
+
+                case MouseButtons.Right:
+                    RemoveCell(x, y);
+                    break;
+            }
+
+            Refresh();
         }
 
         private void nudResolution_ValueChanged(object sender, EventArgs e)
@@ -65,19 +91,19 @@ namespace GameOfLife
             Refresh();
         }
 
-        private void AddCell()
+        private void AddCell(int x, int y)
         {
-
+            DrawRectangle(x, y, Brushes.DeepSkyBlue);
         }
 
-        private void RemoveCell()
+        private void RemoveCell(int x, int y)
         {
-
+            DrawRectangle(x, y, new SolidBrush(BackColor));
         }
 
-        private void DrawCell()
+        private void DrawRectangle(int x, int y, Brush brush)
         {
-
+            graphics.FillRectangle(brush, x * resolution, y * resolution, resolution - 1, resolution - 1);
         }
     }
 }

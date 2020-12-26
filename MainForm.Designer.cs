@@ -289,7 +289,8 @@ namespace GameOfLife
             this.Text = "Game of Life";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.ControlPanel.ResumeLayout(false);
             this.ControlPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
