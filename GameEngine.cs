@@ -49,17 +49,9 @@ namespace GameOfLife
             {
                 Parallel.For(0, rows, y =>
                 {
-                    byte neighboursCount = NeighbourCounts(x, y);
                     bool hasLife = field[x, y];
-
-                    if ((!hasLife && bornRule.Contains(neighboursCount)) || (hasLife && surviveRule.Contains(neighboursCount)))
-                    {
-                        newField[x, y] = true;
-                    }
-                    else
-                    {
-                        newField[x, y] = false;
-                    }
+                    byte neighboursCount = NeighbourCounts(x, y);
+                    newField[x, y] = (!hasLife && bornRule.Contains(neighboursCount)) || (hasLife && surviveRule.Contains(neighboursCount));
                 });
             });
 
@@ -71,19 +63,15 @@ namespace GameOfLife
         {
             byte count = 0;
 
-            for (int i = -1; i <= 1; i++)
+            foreach ((int, int) tuple in new (int, int)[] { (-1, -1), (-1, 0), (-1,  1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)})
             {
-                for (int j = -1; j <= 1; j++)
-                {
-                    int col = (x + i + cols) % cols;
-                    int row = (y + j + rows) % rows;
-                    bool isCellChecking = col == x && row == y;
-                    bool hasLife = field[col, row];
+                int col = (x + tuple.Item1 + cols) % cols;
+                int row = (y + tuple.Item2 + rows) % rows;
+                bool hasLife = field[col, row];
 
-                    if (hasLife && !isCellChecking)
-                    {
-                        count++;
-                    }
+                if (hasLife)
+                {
+                    count++;
                 }
             }
 
