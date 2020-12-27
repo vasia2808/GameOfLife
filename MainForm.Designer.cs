@@ -45,7 +45,8 @@ namespace GameOfLife
             this.nudResolution = new System.Windows.Forms.NumericUpDown();
             this.buttonStart = new System.Windows.Forms.Button();
             this.textBoxGeneration = new System.Windows.Forms.TextBox();
-            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.timerGame = new System.Windows.Forms.Timer(this.components);
+            this.timerMouse = new System.Windows.Forms.Timer(this.components);
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudResolution)).BeginInit();
@@ -292,10 +293,15 @@ namespace GameOfLife
             this.textBoxGeneration.TabStop = false;
             this.textBoxGeneration.Text = "0";
             // 
-            // timer
+            // timerGame
             // 
-            this.timer.Interval = 40;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.timerGame.Interval = 40;
+            this.timerGame.Tick += new System.EventHandler(this.timerGame_Tick);
+            // 
+            // timerMouse
+            // 
+            this.timerMouse.Interval = 2000;
+            this.timerMouse.Tick += new System.EventHandler(this.timerMouse_Tick);
             // 
             // MainForm
             // 
@@ -314,6 +320,7 @@ namespace GameOfLife
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+            this.MouseLeave += new System.EventHandler(this.MainForm_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.controlPanel.ResumeLayout(false);
             this.controlPanel.PerformLayout();
@@ -339,8 +346,9 @@ namespace GameOfLife
         private System.Windows.Forms.NumericUpDown nudResolution;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.TextBox textBoxGeneration;
-        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer timerGame;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.Timer timerMouse;
     }
 }
 

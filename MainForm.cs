@@ -7,6 +7,35 @@ namespace GameOfLife
 {
     public partial class MainForm : Form
     {
+        #region CursonShown
+        private bool _CursorShown = true;
+        private bool CursorShown
+        {
+            get
+            {
+                return _CursorShown;
+            }
+            set
+            {
+                if (value == _CursorShown)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    Cursor.Show();
+                }
+                else
+                {
+                    Cursor.Hide();
+                }
+
+                _CursorShown = value;
+            }
+        }
+        #endregion
+
         private enum GameStatus
         {
             Start,
@@ -34,7 +63,7 @@ namespace GameOfLife
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            controlPanel.Location = new Point((Width - controlPanel.Width) / 2, -controlPanel.Height);
+            controlPanel.Location = new Point((Width - controlPanel.Width) / 2, -controlPanel.Width);
             BackgroundImage = new Bitmap(Width, Height);
             graphics = Graphics.FromImage(BackgroundImage);
 
@@ -61,6 +90,17 @@ namespace GameOfLife
             {
                 MainForm_MouseDown(sender, e);
             }
+
+            if (gameStatus == GameStatus.Start)
+            {
+                CursorShown = true;
+                timerMouse.Start();
+            }
+        }
+
+        private void MainForm_MouseLeave(object sender, EventArgs e)
+        {
+            timerMouse.Stop();
         }
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)
@@ -97,7 +137,7 @@ namespace GameOfLife
 
         private void nudSpeed_ValueChanged(object sender, EventArgs e)
         {
-            timer.Interval = (int)Map((int)nudSpeed.Value, (int)nudSpeed.Minimum, (int)nudSpeed.Maximum, MinSpeed, MaxSpeed);
+            timerGame.Interval = (int)Map((int)nudSpeed.Value, (int)nudSpeed.Minimum, (int)nudSpeed.Maximum, MinSpeed, MaxSpeed);
         }
 
         private float Map(float n, float start1, float stop1, float start2, float stop2)
@@ -143,9 +183,15 @@ namespace GameOfLife
         }
         #endregion
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void timerGame_Tick(object sender, EventArgs e)
         {
             DrawGeneration();
+        }
+
+        private void timerMouse_Tick(object sender, EventArgs e)
+        {
+            CursorShown = false;
+            timerMouse.Stop();
         }
 
         #region MovingControlPanel
@@ -191,17 +237,17 @@ namespace GameOfLife
 
             gameEngine.SetRules(textBoxBorn.Text, textBoxSurvive.Text);
 
-            timer.Start();
+            timerGame.Start();
         }
 
         private void PauseGame()
         {
-            timer.Stop();
+            timerGame.Stop();
         }
 
         private void ResetGame()
         {
-            timer.Stop();
+            timerGame.Stop();
             InitializeGameEngine();
             DrawGrid();
             Refresh();
