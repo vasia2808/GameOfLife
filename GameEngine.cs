@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GameOfLife
 {
@@ -28,7 +27,7 @@ namespace GameOfLife
             this.surviveRule = new HashSet<byte>(surviveRule.Select(c => (byte)char.GetNumericValue(c)));
         }
 
-        public void RandomGeneration(int density)
+        public void GenerateRandom(int density)
         {
             Random random = new Random();
 
@@ -45,15 +44,15 @@ namespace GameOfLife
         {
             bool[,] newField = new bool[cols, rows];
 
-            Parallel.For(0, cols, x =>
+            for (int x = 0; x < cols; x++)
             {
-                Parallel.For(0, rows, y =>
+                for (int y = 0; y < rows; y++)
                 {
                     bool hasLife = field[x, y];
                     byte neighboursCount = NeighbourCounts(x, y);
                     newField[x, y] = (!hasLife && bornRule.Contains(neighboursCount)) || (hasLife && surviveRule.Contains(neighboursCount));
-                });
-            });
+                }
+            }
 
             field = newField;
             CurrentGeneration++;
@@ -63,7 +62,7 @@ namespace GameOfLife
         {
             byte count = 0;
 
-            foreach ((int, int) tuple in new (int, int)[] { (-1, -1), (-1, 0), (-1,  1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)})
+            foreach ((int, int) tuple in new (int, int)[] { (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1) })
             {
                 int col = (x + tuple.Item1 + cols) % cols;
                 int row = (y + tuple.Item2 + rows) % rows;
