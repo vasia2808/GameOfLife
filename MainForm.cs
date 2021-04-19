@@ -44,10 +44,10 @@ namespace GameOfLife
         }
 
         #region constants
-        private const int PanelMovingSpeed = 10;
-        private const int MaxSpeed = 16;
-        private const int MinSpeed = 500;
-        private readonly Color cellColor = Color.DeepSkyBlue;
+        private const int PANEL_MOVING_SPEED = 10;
+        private const int MAX_SPEED = 16;
+        private const int MIN_SPEED = 500;
+        private readonly Color CELL_COLOR = Color.DeepSkyBlue;
         #endregion
 
         private bool controlPanelMoving;
@@ -121,7 +121,7 @@ namespace GameOfLife
                         RemoveCell(x, y);
                         gameEngine.RemoveCell(x, y);
                         break;
-                }
+                };
 
                 Refresh();
             }
@@ -137,7 +137,7 @@ namespace GameOfLife
 
         private void nudSpeed_ValueChanged(object sender, EventArgs e)
         {
-            timerGame.Interval = (int)Map((int)nudSpeed.Value, (int)nudSpeed.Minimum, (int)nudSpeed.Maximum, MinSpeed, MaxSpeed);
+            timerGame.Interval = (int)Map((int)nudSpeed.Value, (int)nudSpeed.Minimum, (int)nudSpeed.Maximum, MIN_SPEED, MAX_SPEED);
         }
 
         private float Map(float n, float start1, float stop1, float start2, float stop2)
@@ -205,9 +205,9 @@ namespace GameOfLife
             controlPanelMoving = true;
             controlPanel.Enabled = true;
 
-            while (controlPanel.Location.Y < 0 - PanelMovingSpeed)
+            while (controlPanel.Location.Y < 0 - PANEL_MOVING_SPEED)
             {
-                controlPanel.Location = new Point(controlPanel.Location.X, controlPanel.Location.Y + PanelMovingSpeed);
+                controlPanel.Location = new Point(controlPanel.Location.X, controlPanel.Location.Y + PANEL_MOVING_SPEED);
                 await Task.Delay(16);
             }
 
@@ -219,9 +219,9 @@ namespace GameOfLife
         {
             controlPanelMoving = true;
 
-            while (controlPanel.Location.Y > -controlPanel.Height + PanelMovingSpeed)
+            while (controlPanel.Location.Y > -controlPanel.Height + PANEL_MOVING_SPEED)
             {
-                controlPanel.Location = new Point(controlPanel.Location.X, controlPanel.Location.Y - PanelMovingSpeed);
+                controlPanel.Location = new Point(controlPanel.Location.X, controlPanel.Location.Y - PANEL_MOVING_SPEED);
                 await Task.Delay(16);
             }
 
@@ -324,7 +324,7 @@ namespace GameOfLife
 
         private void AddCell(int x, int y)
         {
-            DrawRectangle(x, y, new SolidBrush(cellColor));
+            DrawRectangle(x, y, new SolidBrush(CELL_COLOR));
         }
 
         private void RemoveCell(int x, int y)

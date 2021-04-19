@@ -95,7 +95,7 @@ namespace GameOfLife
             this.controlPanel.Padding = new System.Windows.Forms.Padding(5);
             this.controlPanel.RowCount = 1;
             this.controlPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.controlPanel.Size = new System.Drawing.Size(1388, 47);
+            this.controlPanel.Size = new System.Drawing.Size(1287, 47);
             this.controlPanel.TabIndex = 1;
             // 
             // buttonReset
@@ -103,7 +103,7 @@ namespace GameOfLife
             this.buttonReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.buttonReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonReset.Location = new System.Drawing.Point(1074, 5);
+            this.buttonReset.Location = new System.Drawing.Point(973, 5);
             this.buttonReset.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(150, 37);
@@ -116,9 +116,9 @@ namespace GameOfLife
             // 
             this.textBoxSurvive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.textBoxSurvive.ForeColor = System.Drawing.Color.White;
-            this.textBoxSurvive.Location = new System.Drawing.Point(431, 8);
+            this.textBoxSurvive.Location = new System.Drawing.Point(374, 8);
             this.textBoxSurvive.Name = "textBoxSurvive";
-            this.textBoxSurvive.Size = new System.Drawing.Size(90, 30);
+            this.textBoxSurvive.Size = new System.Drawing.Size(90, 26);
             this.textBoxSurvive.TabIndex = 14;
             this.textBoxSurvive.TabStop = false;
             this.textBoxSurvive.Text = "23";
@@ -127,9 +127,9 @@ namespace GameOfLife
             // 
             this.labelSurvive.AutoSize = true;
             this.labelSurvive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelSurvive.Location = new System.Drawing.Point(347, 5);
+            this.labelSurvive.Location = new System.Drawing.Point(308, 5);
             this.labelSurvive.Name = "labelSurvive";
-            this.labelSurvive.Size = new System.Drawing.Size(78, 37);
+            this.labelSurvive.Size = new System.Drawing.Size(60, 37);
             this.labelSurvive.TabIndex = 13;
             this.labelSurvive.Text = "Survive";
             this.labelSurvive.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -138,9 +138,9 @@ namespace GameOfLife
             // 
             this.textBoxBorn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.textBoxBorn.ForeColor = System.Drawing.Color.White;
-            this.textBoxBorn.Location = new System.Drawing.Point(251, 8);
+            this.textBoxBorn.Location = new System.Drawing.Point(212, 8);
             this.textBoxBorn.Name = "textBoxBorn";
-            this.textBoxBorn.Size = new System.Drawing.Size(90, 30);
+            this.textBoxBorn.Size = new System.Drawing.Size(90, 26);
             this.textBoxBorn.TabIndex = 12;
             this.textBoxBorn.TabStop = false;
             this.textBoxBorn.Text = "3";
@@ -149,9 +149,9 @@ namespace GameOfLife
             // 
             this.labelBorn.AutoSize = true;
             this.labelBorn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelBorn.Location = new System.Drawing.Point(192, 5);
+            this.labelBorn.Location = new System.Drawing.Point(163, 5);
             this.labelBorn.Name = "labelBorn";
-            this.labelBorn.Size = new System.Drawing.Size(53, 37);
+            this.labelBorn.Size = new System.Drawing.Size(43, 37);
             this.labelBorn.TabIndex = 11;
             this.labelBorn.Text = "Born";
             this.labelBorn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -162,7 +162,7 @@ namespace GameOfLife
             this.nudSpeed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.nudSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nudSpeed.ForeColor = System.Drawing.Color.White;
-            this.nudSpeed.Location = new System.Drawing.Point(618, 8);
+            this.nudSpeed.Location = new System.Drawing.Point(547, 8);
             this.nudSpeed.Maximum = new decimal(new int[] {
             10,
             0,
@@ -174,7 +174,7 @@ namespace GameOfLife
             0,
             0});
             this.nudSpeed.Name = "nudSpeed";
-            this.nudSpeed.Size = new System.Drawing.Size(54, 30);
+            this.nudSpeed.Size = new System.Drawing.Size(43, 26);
             this.nudSpeed.TabIndex = 10;
             this.nudSpeed.TabStop = false;
             this.nudSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -189,9 +189,9 @@ namespace GameOfLife
             // 
             this.labelSpeed.AutoSize = true;
             this.labelSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelSpeed.Location = new System.Drawing.Point(542, 5);
+            this.labelSpeed.Location = new System.Drawing.Point(485, 5);
             this.labelSpeed.Name = "labelSpeed";
-            this.labelSpeed.Size = new System.Drawing.Size(70, 37);
+            this.labelSpeed.Size = new System.Drawing.Size(56, 37);
             this.labelSpeed.TabIndex = 9;
             this.labelSpeed.Text = "Speed";
             this.labelSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -200,9 +200,9 @@ namespace GameOfLife
             // 
             this.labelGeneration.AutoSize = true;
             this.labelGeneration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelGeneration.Location = new System.Drawing.Point(693, 5);
+            this.labelGeneration.Location = new System.Drawing.Point(611, 5);
             this.labelGeneration.Name = "labelGeneration";
-            this.labelGeneration.Size = new System.Drawing.Size(108, 37);
+            this.labelGeneration.Size = new System.Drawing.Size(89, 37);
             this.labelGeneration.TabIndex = 7;
             this.labelGeneration.Text = "Generation";
             this.labelGeneration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -213,7 +213,7 @@ namespace GameOfLife
             this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.buttonExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExit.Location = new System.Drawing.Point(1230, 5);
+            this.buttonExit.Location = new System.Drawing.Point(1129, 5);
             this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(150, 37);
@@ -228,7 +228,7 @@ namespace GameOfLife
             this.labelResolution.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelResolution.Location = new System.Drawing.Point(8, 5);
             this.labelResolution.Name = "labelResolution";
-            this.labelResolution.Size = new System.Drawing.Size(103, 37);
+            this.labelResolution.Size = new System.Drawing.Size(85, 37);
             this.labelResolution.TabIndex = 0;
             this.labelResolution.Text = "Resolution";
             this.labelResolution.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -239,24 +239,19 @@ namespace GameOfLife
             this.nudResolution.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.nudResolution.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nudResolution.ForeColor = System.Drawing.Color.White;
-            this.nudResolution.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.nudResolution.Location = new System.Drawing.Point(117, 8);
+            this.nudResolution.Location = new System.Drawing.Point(99, 8);
             this.nudResolution.Maximum = new decimal(new int[] {
             25,
             0,
             0,
             0});
             this.nudResolution.Minimum = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             0});
             this.nudResolution.Name = "nudResolution";
-            this.nudResolution.Size = new System.Drawing.Size(54, 30);
+            this.nudResolution.Size = new System.Drawing.Size(43, 26);
             this.nudResolution.TabIndex = 3;
             this.nudResolution.TabStop = false;
             this.nudResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -272,7 +267,7 @@ namespace GameOfLife
             this.buttonStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
             this.buttonStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonStart.Location = new System.Drawing.Point(918, 5);
+            this.buttonStart.Location = new System.Drawing.Point(817, 5);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(150, 37);
@@ -285,10 +280,10 @@ namespace GameOfLife
             // 
             this.textBoxGeneration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.textBoxGeneration.ForeColor = System.Drawing.Color.White;
-            this.textBoxGeneration.Location = new System.Drawing.Point(807, 8);
+            this.textBoxGeneration.Location = new System.Drawing.Point(706, 8);
             this.textBoxGeneration.Name = "textBoxGeneration";
             this.textBoxGeneration.ReadOnly = true;
-            this.textBoxGeneration.Size = new System.Drawing.Size(90, 30);
+            this.textBoxGeneration.Size = new System.Drawing.Size(90, 26);
             this.textBoxGeneration.TabIndex = 8;
             this.textBoxGeneration.TabStop = false;
             this.textBoxGeneration.Text = "0";
@@ -305,7 +300,7 @@ namespace GameOfLife
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1350, 775);
